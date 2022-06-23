@@ -1,0 +1,5 @@
+C:\Users\Alumno\Desktop\programacion\SdlMuncher\vs2010project\obj\x86\Release\ResolveAssemblyReference.cache
+C:\Users\Alumno\Desktop\programacion\SdlMuncher\vs2010project\obj\x86\Release\SdlMuncher.exe
+C:\Users\Alumno\Desktop\programacion\SdlMuncher\vs2010project\obj\x86\Release\SdlMuncher.pdb
+C:\Users\Alumno\Desktop\programacion\SdlMuncher\SdlMuncher.exe
+C:\Users\Alumno\Desktop\programacion\SdlMuncher\SdlMuncher.pdb

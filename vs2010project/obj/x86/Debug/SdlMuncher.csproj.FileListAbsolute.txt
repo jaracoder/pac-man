@@ -1,0 +1,23 @@
+C:\Users\Alumno\Desktop\programacion\SdlMuncher\vs2010project\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Alumno\Desktop\programacion\SdlMuncher\vs2010project\obj\x86\Debug\SdlMuncher.exe
+C:\Users\Alumno\Desktop\programacion\SdlMuncher\vs2010project\obj\x86\Debug\SdlMuncher.pdb
+C:\Users\Alumno\Desktop\programacion\SdlMuncher\SdlMuncher.exe
+C:\Users\Alumno\Desktop\programacion\SdlMuncher\SdlMuncher.pdb
+C:\Users\J.Admin\Desktop\SdlMuncher\vs2010project\obj\x86\Debug\SdlMuncher.exe
+C:\Users\J.Admin\Desktop\SdlMuncher\vs2010project\obj\x86\Debug\SdlMuncher.pdb
+C:\Users\J.Admin\Desktop\SdlMuncher\vs2010project\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\J.Admin\Desktop\SdlMuncher\SdlMuncher.exe
+C:\Users\J.Admin\Desktop\SdlMuncher\SdlMuncher.pdb
+C:\Users\J.Admin\Desktop\Diseño Juegos\SdlMuncher\vs2010project\obj\x86\Debug\SdlMuncher.exe
+C:\Users\J.Admin\Desktop\Diseño Juegos\SdlMuncher\vs2010project\obj\x86\Debug\SdlMuncher.pdb
+C:\Users\J.Admin\Desktop\Diseño Juegos\SdlMuncher(UltimaVersion)\vs2010project\obj\x86\Debug\SdlMuncher.exe
+C:\Users\J.Admin\Desktop\Diseño Juegos\SdlMuncher(UltimaVersion)\vs2010project\obj\x86\Debug\SdlMuncher.pdb
+G:\Proyectos Nube 0ffice\Atlas\Proyectos - Proyectos\2- En planificación\Game Pacman\pacman\vs2010project\obj\x86\Debug\SdlMuncher.csproj.AssemblyReference.cache
+G:\Proyectos Nube 0ffice\Atlas\Proyectos - Proyectos\2- En planificación\Game Pacman\pacman\vs2010project\obj\x86\Debug\SdlMuncher.csproj.SuggestedBindingRedirects.cache
+G:\Proyectos Nube 0ffice\Atlas\Proyectos - Proyectos\2- En planificación\Game Pacman\pacman\vs2010project\obj\x86\Debug\SdlMuncher.csproj.CoreCompileInputs.cache
+G:\Proyectos Nube 0ffice\Atlas\Proyectos - Proyectos\2- En planificación\Game Pacman\pacman\vs2010project\obj\x86\Debug\SdlMuncher.csproj.CopyComplete
+G:\Proyectos Nube 0ffice\Atlas\Proyectos - Proyectos\2- En planificación\Game Pacman\pacman\SdlMuncher.exe.config
+G:\Proyectos Nube 0ffice\Atlas\Proyectos - Proyectos\2- En planificación\Game Pacman\pacman\vs2010project\obj\x86\Debug\SdlMuncher.exe
+G:\Proyectos Nube 0ffice\Atlas\Proyectos - Proyectos\2- En planificación\Game Pacman\pacman\vs2010project\obj\x86\Debug\SdlMuncher.pdb
+G:\Proyectos Nube 0ffice\Atlas\Proyectos - Proyectos\2- En planificación\Game Pacman\pacman\SdlMuncher.exe
+G:\Proyectos Nube 0ffice\Atlas\Proyectos - Proyectos\2- En planificación\Game Pacman\pacman\SdlMuncher.pdb
