@@ -1,58 +1,43 @@
-/// <summary>
-///  SdlHardware: to hide SDL details and allow an easier access
-///  @author Nacho Cabanes
-/// </summary>
-
-/* --------------------------------------------------         
-   Versions history
-   
-   Num.   Date        By / Changes
-   ---------------------------------------------------
-   0.01  30-Oct-2012  Nacho Cabanes
-                      Basic Skeleton hiding SDL
-                      Allows only BMP images (no PNG, no JPG,                    
-                        no sound, no TTF, no mouse...)
-                      Class "Image" is also included in this file
-   0.02  16-Nov-2012  Nacho Cabanes
-                      Extended to allow PNG, JPG,
-                        MP3 sound, TTF fonts
-                      Class "Font" is also included in this file
- ---------------------------------------------------- */
-
 using System;
 using System.IO;
 using System.Threading;
 using Tao.Sdl;
 
+//Title: https://wiki.libsdl.org/SDL_SetWindowTitle
+//Icon: https://www.libsdl.org/release/SDL-1.2.15/docs/html/sdlwmseticon.html
+//Examples C#: https://csharp.hotexamples.com/es/examples/Tao.Sdl/Sdl.SDL_Rect/-/php-sdl.sdl_rect-class-examples.html
+// https://sourceforge.net/projects/taoframework/files/The%20Tao%20Framework/
 public class SdlHardware
 {
     static IntPtr hiddenScreen;
     static short width, height;
 
     
-    public static void Init(short w, short h, int colors, bool fullScreen)
+    public static void InitWindow(short w, short h, int colors, bool fullScreen, string title, string icon)
     {
         width = w;
         height = h;
-        
+
         int flags = Sdl.SDL_HWSURFACE | Sdl.SDL_DOUBLEBUF | Sdl.SDL_ANYFORMAT;
         if (fullScreen)
+        {
             flags |= Sdl.SDL_FULLSCREEN;
+        }
+       
         Sdl.SDL_Init(Sdl.SDL_INIT_EVERYTHING);
-        hiddenScreen = Sdl.SDL_SetVideoMode(
-          width, 
-          height, 
-          colors, 
-          flags);
-          
-        Sdl.SDL_Rect rect2 = 
-          new Sdl.SDL_Rect(0,0, (short) width, (short) height);
+        Sdl.SDL_WM_SetCaption(title, icon);
+        Sdl.SDL_WM_SetIcon(Sdl.SDL_LoadBMP(icon), null);
+       
+        hiddenScreen = Sdl.SDL_SetVideoMode(width, height, colors, flags);
+       
+        Sdl.SDL_Rect rect2 = new Sdl.SDL_Rect(0,0, width, height);
         Sdl.SDL_SetClipRect(hiddenScreen, ref rect2);
 
-        if (SdlMixer.Mix_OpenAudio(22050,
-              unchecked(Sdl.AUDIO_S16LSB), 2, 1024) == -1)
-            FatalError("No se ha podido inicializar el Sonido"); 
-
+        if (SdlMixer.Mix_OpenAudio(22050, unchecked(Sdl.AUDIO_S16LSB), 2, 1024) == -1) 
+        {
+            FatalError("No se ha podido inicializar la librería de sonido");
+        }
+          
         SdlTtf.TTF_Init();
     }
 

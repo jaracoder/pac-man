@@ -1,6 +1,5 @@
 /*
-  First mini-graphics-game skeleton
-  Version R: ghosts with random movement
+  by: jaracoder.com
 */
 
 using System;
@@ -8,45 +7,50 @@ using System;
 public class SdlMuncher
 {
     static int countTime;
-
     static int countEnemy;
     static int totallives = 3;
-   
-
     static int pointeat;
+    static int amountOfDots;
+    static int countsecuence;
+    static int totalsecuence;
+    static int amountBigDots;
+    static int startX = 32 * 12;
+    static int startY = 32 * 8;
+    static int lives;
+    static int x, y;
+    static int pacSpeed;
+    static int amountOfEnemies;
+    static int countImageR;
+    static int countImageL;
+    static int countImageU;
+    static int countImageD;
+    static int score;
+
+    static bool MovePacmanRight;
+    static bool MovePacmanLeft;
+    static bool MovePacmanTop;
+    static bool MovePacmanDown;
+    static bool secuencepacdeath;
+    static bool stopenemies;
+    static bool pursued;
+    static bool sessionFinished = false;
+    static bool FruitVisible;
+    static bool gameFinished;
+
+    static Random randomGenerator;
+
     struct Dot
     {
         public int x;
         public int y;
         public bool visible;
     }
-    static Dot[] dots;
-    static int amountOfDots;
-
-    static bool MovePacmanRight;
-    static bool MovePacmanLeft;
-    static bool MovePacmanTop;
-    static bool MovePacmanDown;
-
-    static bool secuencepacdeath;
-    static int countsecuence;
-    static string[] pacdeath = {"data/pacD01.png", "data/pacD01.png", "data/pacD01.png", "data/pacD01.png", "data/pacD01.png", 
-                                "data/pacD02.png", "data/pacD02.png", "data/pacD02.png", "data/pacD02.png", "data/pacD02.png", 
-                                "data/pacD03.png", "data/pacD03.png", "data/pacD03.png", "data/pacD03.png", "data/pacD03.png",  
-                                "data/pacD04.png", "data/pacD04.png", "data/pacD04.png", "data/pacD04.png", "data/pacD04.png", 
-                                "data/pacD05.png", "data/pacD05.png", "data/pacD05.png", "data/pacD05.png", "data/pacD05.png", 
-                                "data/pacD06.png", "data/pacD06.png", "data/pacD06.png", "data/pacD06.png", "data/pacD06.png",};
-    static int totalsecuence;
-
     struct BigDot
     {
         public int x;
         public int y;
         public bool visible;
     }
-    static BigDot[] Bigdots;
-    static int amountBigDots;
-    
     struct Enemy
     {
         public float x;
@@ -56,32 +60,23 @@ public class SdlMuncher
         public bool visible;
         public bool pursued;
     }
+
+    static Dot[] dots;
+    static BigDot[] Bigdots;
     static Enemy[] enemies;
-    static bool stopenemies;
 
-    static int amountOfEnemies;
-    static bool pursued;
-
-    static bool sessionFinished = false;
-    static int startX = 32 * 12;
-    static int startY = 32 * 8;
-    static int lives;
-    static int x, y;
-    static int pacSpeed;
+    static Font fontJoystix18, fontJoystix10;
 
     static Image banner;
     static Image dotImage;
     static Image dotBigImage;
-    
+    static Image logoDevelopedBy;
     static Image enemyImage;
     static Image enemyImageRed;
     static Image enemyImagePurple;
     static Image enemyImageBlue;
     static Image enemyPursued;
-
     static Image Fruit;
-    static bool FruitVisible;
-
     static Image pacImageR;
     static Image pacImageR1;
     static Image pacImageL;
@@ -90,21 +85,12 @@ public class SdlMuncher
     static Image pacImageD1;
     static Image pacImageU;
     static Image pacImageU1;
-
-    static int countImageR;
-    static int countImageL;
-    static int countImageU;
-    static int countImageD;
-
-
-
     static Image wallImage;
 
     static Sonido eatPac;
     static Sonido pacdead;
     static Sonido pacbegin;
     static Sonido pacghost;
-
 
     static string[] map = {
             "                       ",
@@ -124,17 +110,20 @@ public class SdlMuncher
             "    -o...-..p..-...o-   ",
             "    -----------------   "
     };
-    
-    static int score;
-    static Font sans18;
-    static bool gameFinished;
-    static Random randomGenerator;
 
+    static string[] pacdeath = {"data/pacD01.png", "data/pacD01.png", "data/pacD01.png", "data/pacD01.png", "data/pacD01.png",
+                                "data/pacD02.png", "data/pacD02.png", "data/pacD02.png", "data/pacD02.png", "data/pacD02.png",
+                                "data/pacD03.png", "data/pacD03.png", "data/pacD03.png", "data/pacD03.png", "data/pacD03.png",
+                                "data/pacD04.png", "data/pacD04.png", "data/pacD04.png", "data/pacD04.png", "data/pacD04.png",
+                                "data/pacD05.png", "data/pacD05.png", "data/pacD05.png", "data/pacD05.png", "data/pacD05.png",
+                                "data/pacD06.png", "data/pacD06.png", "data/pacD06.png", "data/pacD06.png", "data/pacD06.png",};
 
     public static void Init()
     {
         bool fullScreen = false;
-        SdlHardware.Init(800, 600, 24, fullScreen);
+        Console.Title = "Pac-Man";
+        
+        SdlHardware.InitWindow(800, 600, 24, fullScreen, "Pac-Man", "data/logo.bmp");
 
         pointeat = 0;
         countTime = 0;
@@ -150,38 +139,30 @@ public class SdlMuncher
         banner = new Image("data/banner.png");
         dotImage = new Image("data/dot.png");
         dotBigImage = new Image("data/bigDot.png");
-
-
         enemyImage = new Image("data/ghostGreen.png");
         enemyImageRed = new Image("data/ghostRed.png");
         enemyImagePurple = new Image("data/ghostPurple.png");
         enemyImageBlue = new Image("data/ghostBlue.png");
-
         enemyPursued = new Image("data/ghostGrey.png");
-
         pacImageR = new Image("data/pac01r.png");
- 
         pacImageL = new Image("data/pac01l.png");
         pacImageD = new Image("data/pac01d.png");
         pacImageU = new Image("data/pac01u.png");
-
         pacImageR1 = new Image("data/pac02r.png");
         pacImageL1 = new Image("data/pac02l.png");
         pacImageD1 = new Image("data/pac02d.png");
         pacImageU1 = new Image("data/pac02u.png");
-
         wallImage = new Image("data/wall.png");
+        logoDevelopedBy = new Image("data/developed_by.png");
 
         eatPac = new Sonido("data/paceat.wav");
-
         pacghost = new Sonido("data/pacghost.wav");
         pacbegin = new Sonido("data/pacbegin.wav");
         pacdead = new Sonido("data/pacdead.wav");
 
-        sans18 = new Font("data/Joystix.ttf", 18);
+        fontJoystix18 = new Font("data/Joystix.ttf", 18);
+        fontJoystix10 = new Font("data/Joystix.ttf", 10);
 
-
-      
         // Data for the dots
         // First: count how many dots are there
         amountOfDots = 0;
@@ -245,13 +226,8 @@ public class SdlMuncher
 
         FruitVisible = true;
         
+      
     }
-
-
-    
-
-    
-
 
     public static void PrepareGameStart()
     {
@@ -315,7 +291,6 @@ public class SdlMuncher
         FruitVisible = true;
     }
 
-
     public static void Intro()
     {
         int x = -40;
@@ -326,18 +301,20 @@ public class SdlMuncher
         {
             SdlHardware.ClearScreen();
             SdlHardware.DrawHiddenImage(banner, 40, 50);
-            SdlHardware.WriteHiddenText("Hit SPACE to start",
-                260, 460,
-                0xFF, 0xFF, 0xFF,
-                sans18);
-            SdlHardware.WriteHiddenText("or Q to Quit",
-                300, 490,
-                0xFF, 0xFF, 0xFF,
-                sans18);
-         
-            SdlHardware.DrawHiddenImage(enemyImage, x - 50, 300);
+            SdlHardware.WriteHiddenText("Press Enter to Start", 260, 380, 0xFF, 0xFF, 0xFF, fontJoystix18);
+            SdlHardware.WriteHiddenText("(H) Help", 315, 420, 0xFF, 0xFF, 0xFF, fontJoystix18);
+            SdlHardware.WriteHiddenText("(C) Credits", 315, 450, 0xFF, 0xFF, 0xFF, fontJoystix18);
+            SdlHardware.WriteHiddenText("(Q) Quit", 315, 480, 0xFF, 0xFF, 0xFF, fontJoystix18);
+            
+            SdlHardware.DrawHiddenImage(enemyImage, x - 100, 300);
+            SdlHardware.DrawHiddenImage(enemyImageBlue, x - 150, 300);
+            SdlHardware.DrawHiddenImage(enemyImageRed, x - 200, 300);
+            SdlHardware.DrawHiddenImage(enemyImagePurple, x - 250, 300);
 
-           
+            SdlHardware.WriteHiddenText("Ver. 1.0.0.1", 30, 575, 0xFF, 0xFF, 0xFF, fontJoystix10);
+            SdlHardware.WriteHiddenText("developed by", 650, 558, 0xFF, 0xFF, 0xFF, fontJoystix10);
+            SdlHardware.DrawHiddenImage(logoDevelopedBy, 648, 568);
+
             if (countimagepac == 0)
             {
                 SdlHardware.DrawHiddenImage(pacImageR, x, 300);
@@ -350,16 +327,28 @@ public class SdlMuncher
             }
 
             SdlHardware.ShowHiddenScreen();
+           
             x += 8;
-            if (x > 850) x = -40;
+            if (x > 1200)
+            {
+                x = -40;
+            }
+              
             SdlHardware.Pause(20);
+
             if (SdlHardware.KeyPressed(SdlHardware.KEY_C))
+            {
                 ShowCredits();
-            if (SdlHardware.KeyPressed(SdlHardware.KEY_H))
+            }
+            else if (SdlHardware.KeyPressed(SdlHardware.KEY_H))
+            {
                 ShowHelp();
-            if (SdlHardware.KeyPressed(SdlHardware.KEY_SPC))
+            }
+            else if (SdlHardware.KeyPressed(SdlHardware.KEY_RETURN))
+            {
                 exitIntro = true;
-            if (SdlHardware.KeyPressed(SdlHardware.KEY_Q))
+            }
+            else if (SdlHardware.KeyPressed(SdlHardware.KEY_Q))
             {
                 exitIntro = true;
                 sessionFinished = true;
@@ -368,18 +357,17 @@ public class SdlMuncher
         while (!exitIntro);
     }
 
-
     public static void ShowCredits()
     {
         SdlHardware.ClearScreen();
         SdlHardware.WriteHiddenText("By DAM Ies San Vicente 2012-2013",
             200, 500,
             0xCC, 0xCC, 0xCC,
-            sans18);
+            fontJoystix18);
         SdlHardware.WriteHiddenText("Hit ESC to return",
             300, 540,
             0x99, 0x99, 0x99,
-            sans18);
+            fontJoystix18);
         SdlHardware.ShowHiddenScreen();
         do
         {
@@ -387,7 +375,6 @@ public class SdlMuncher
         }
         while (!SdlHardware.KeyPressed(SdlHardware.KEY_ESC));
     }
-
 
     public static void ShowHelp()
     {
@@ -395,11 +382,11 @@ public class SdlMuncher
         SdlHardware.WriteHiddenText("Eat the dots, avoid the ghosts.",
             200, 500,
             0xCC, 0xCC, 0xCC,
-            sans18);
+            fontJoystix18);
         SdlHardware.WriteHiddenText("Hit ESC to return",
             300, 540,
             0x99, 0x99, 0x99,
-            sans18);
+            fontJoystix18);
         SdlHardware.ShowHiddenScreen();
         do
         {
@@ -407,7 +394,6 @@ public class SdlMuncher
         }
         while (!SdlHardware.KeyPressed(SdlHardware.KEY_ESC));
     }
-
 
     public static bool CanMoveTo(int x, int y, string[] map)
     {
@@ -429,7 +415,6 @@ public class SdlMuncher
         }
         return canMove;
     }
-
 
     public static void DrawElements()
     {
@@ -595,7 +580,7 @@ public class SdlMuncher
         SdlHardware.WriteHiddenText("Score: " + score,
             32*16, 550,
             0xFF, 0xFF, 0xFF,
-            sans18);
+            fontJoystix18);
 
         int ancho = 32 * 4;
         for (int i = 0; i < totallives; i++)
@@ -612,7 +597,6 @@ public class SdlMuncher
 
         SdlHardware.ShowHiddenScreen();
     }
-
 
     public static void CheckInputDevices()
     {
@@ -661,8 +645,7 @@ public class SdlMuncher
         if (SdlHardware.KeyPressed(SdlHardware.KEY_ESC))
             gameFinished = true;
     }
-
-
+    
     public static void MoveElements()
     {
         // Move enemies and environment
@@ -704,8 +687,7 @@ public class SdlMuncher
             }
         }
     }
-
-
+    
     public static void CheckCollisions()
     {
         // Collisions, lose energy or lives, etc
@@ -784,6 +766,7 @@ public class SdlMuncher
         if (pursued)
             CheckTimeOfPursued();
     }
+    
     public static void EnemysPursued() 
     {
         enemies[0].pursued = true;
@@ -791,6 +774,7 @@ public class SdlMuncher
         enemies[2].pursued = true;
         enemies[3].pursued = true;
     }
+    
     public static void EnemysNotPursued()
     {
         enemies[0].pursued = false;
@@ -798,6 +782,7 @@ public class SdlMuncher
         enemies[2].pursued = false;
         enemies[3].pursued = false;
     }
+    
     public static void CargarSecuencePacDeath() 
     {
         if (countsecuence < totalsecuence)
@@ -838,6 +823,7 @@ public class SdlMuncher
     {
         stopenemies = true;
     }
+    
     public static bool CheckTimeOfEnemy()
     {
         countEnemy++;
@@ -847,7 +833,6 @@ public class SdlMuncher
             return false;
     }
   
-
     public static void CheckTimeOfPursued()
     {
         countTime++;
@@ -861,11 +846,11 @@ public class SdlMuncher
         }
             
     }
+    
     public static void PauseTillNextFrame()
     {
         SdlHardware.Pause(40);
     }
-
 
     public static void Main()
     {
@@ -885,10 +870,10 @@ public class SdlMuncher
                 MoveElements();
                 CheckCollisions();
                 PauseTillNextFrame();
-            } // end of game loop
+            } 
 
             Intro();
 
-        } // end of session
-    } // end of  Main
-} // end of class
+        } 
+    }
+}

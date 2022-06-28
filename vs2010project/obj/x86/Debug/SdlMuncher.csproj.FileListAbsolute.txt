@@ -21,3 +21,12 @@ G:\Proyectos Nube 0ffice\Atlas\Proyectos - Proyectos\2- En planificación\Game P
 G:\Proyectos Nube 0ffice\Atlas\Proyectos - Proyectos\2- En planificación\Game Pacman\pacman\vs2010project\obj\x86\Debug\SdlMuncher.pdb
 G:\Proyectos Nube 0ffice\Atlas\Proyectos - Proyectos\2- En planificación\Game Pacman\pacman\SdlMuncher.exe
 G:\Proyectos Nube 0ffice\Atlas\Proyectos - Proyectos\2- En planificación\Game Pacman\pacman\SdlMuncher.pdb
+C:\git\pacman\vs2010project\obj\x86\Debug\SdlMuncher.csproj.AssemblyReference.cache
+C:\git\pacman\vs2010project\obj\x86\Debug\SdlMuncher.csproj.SuggestedBindingRedirects.cache
+C:\git\pacman\vs2010project\obj\x86\Debug\SdlMuncher.csproj.CoreCompileInputs.cache
+C:\git\pacman\vs2010project\obj\x86\Debug\SdlMuncher.csproj.CopyComplete
+C:\git\pacman\SdlMuncher.exe.config
+C:\git\pacman\vs2010project\obj\x86\Debug\SdlMuncher.exe
+C:\git\pacman\vs2010project\obj\x86\Debug\SdlMuncher.pdb
+C:\git\pacman\SdlMuncher.exe
+C:\git\pacman\SdlMuncher.pdb
